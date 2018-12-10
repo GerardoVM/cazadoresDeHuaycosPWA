@@ -20,5 +20,5 @@ func main() {
 	LinkOpenAPI(r)
 	LinkAuthJWT(r) // Making the auth context, all above this will be restricted
 	LinkUsersHelper(r)
-	r.Run(":4700")
+	r.Run(":443")
 }
