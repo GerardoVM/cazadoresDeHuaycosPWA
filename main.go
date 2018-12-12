@@ -16,7 +16,7 @@ func main() {
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
 		AllowAllOrigins: true,
-		AllowedOrigins:	[]string{"*"}
+		AllowedOrigins:	[]string{"*"},
 	}))
 	LinkVideosApi(r)
 	LinkAdminAPI(r)
