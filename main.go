@@ -27,15 +27,20 @@ import (
 //}
 
 func HelloServer(w http.ResponseWriter, req *http.Request) {
+    enableCors(&w)
     w.Header().Set("Content-Type", "text/plain")
     w.Write([]byte("This is an example server.\n"))
     // fmt.Fprintf(w, "This is an example server.\n")
     // io.WriteString(w, "This is an example server.\n")
 }
 
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+}
+
 func main() {
-    http.HandleFunc("/hello", HelloServer)
-    err := http.ListenAndServeTLS("Citapp.tk:443", "cert.crt", "cert.key", nil)
+    http.HandleFunc("/", HelloServer)
+    err := http.ListenAndServeTLS("citapp.tk:443", "cert.pem", "key.pem", nil)
     if err != nil {
         log.Fatal("ListenAndServe: ", err)
     }
