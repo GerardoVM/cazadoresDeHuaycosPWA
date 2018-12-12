@@ -2,9 +2,9 @@ package main
 
 import (
 	"log"
-	"github.com/gin-gonic/gin"
-	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/autotls"
+	//"github.com/gin-gonic/gin"
+	//"github.com/gin-contrib/cors"
+	//"github.com/gin-gonic/autotls"
 	"net/http"
 )
 
