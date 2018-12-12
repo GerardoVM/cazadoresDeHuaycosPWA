@@ -28,10 +28,10 @@ import (
 //}
 
 type signupBody struct {
-    dni Int,
-    email String,
-    password Int,
-    name String,
+    dni int
+    email string
+    password int
+    name string
 }
 
 func HomeServer(w http.ResponseWriter, req *http.Request) {
@@ -54,7 +54,7 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
       if err != nil {
           panic(err)
       }
-      
+
     log.Println(requestBody.dni)
 
     //profile := Profile{"Alex", []string{"snowboarding", "programming"}}
