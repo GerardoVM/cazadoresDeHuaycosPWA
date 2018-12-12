@@ -59,7 +59,7 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
           panic(err)
       }
 
-    log.Println("no panic")
+    w.Write(err)
 
     //profile := Profile{"Alex", []string{"snowboarding", "programming"}}
 
