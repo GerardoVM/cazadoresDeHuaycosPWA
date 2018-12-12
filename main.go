@@ -46,6 +46,8 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     enableCors(&w)
 
+    w.Header().Set("Content-Type", "application/json")
+
     data := json.NewDecoder(req.Body)
 
     var requestBody signupBody
@@ -59,7 +61,9 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
           panic(err)
       }
 
-    w.Write("YOLO")
+    js, err := json.Marshal(req.Body)
+
+    w.Write(js)
 
     //profile := Profile{"Alex", []string{"snowboarding", "programming"}}
 
