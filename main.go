@@ -28,6 +28,11 @@ import (
 	//log.Fatal(autotls.Run(r,"citapp.tk"))
 //}
 
+type Profile struct {
+  Name    string
+  Hobbies []string
+}
+
 func HomeServer(w http.ResponseWriter, req *http.Request) {
     enableCors(&w)
     w.Header().Set("Content-Type", "text/plain")
