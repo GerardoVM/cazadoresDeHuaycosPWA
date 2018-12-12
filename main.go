@@ -8,6 +8,7 @@ import (
 	"github.com/gorilla/mux"
 	"encoding/json"
 	"io/ioutil"
+	"fmt"
 )
 
 //func main() {
@@ -32,7 +33,7 @@ type signupBody struct {
 	dni   string
 	email string
 	password   string
-	name   string  
+	name   string
 }
 
 func HomeServer(w http.ResponseWriter, req *http.Request) {
@@ -50,27 +51,11 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
     w.Header().Set("content-type", "application/json")
 
     b, err := ioutil.ReadAll(req.Body)
-    	defer req.Body.Close()
-    	if err != nil {
-    		http.Error(w, err.Error(), 500)
-    		return
-    	}
+    if err != nil {
+        panic(err)
+    }
 
-    	// Unmarshal
-    	var msg signupBody
-    	err = json.Unmarshal(b, &msg)
-    	if err != nil {
-    		http.Error(w, err.Error(), 500)
-    		return
-    	}
-
-    	output, err := json.Marshal(msg)
-    	if err != nil {
-    		http.Error(w, err.Error(), 500)
-    		return
-    	}
-
-    	w.Write(output)
+    fmt.Printf("%s", b)
 
     //profile := Profile{"Alex", []string{"snowboarding", "programming"}}
 
