@@ -50,6 +50,8 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     var requestBody signupBody
 
+    log.Println(req.Body)
+
     err := data.Decode(&requestBody)
       if err != nil {
         log.Println(req.Body)
