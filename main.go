@@ -1,8 +1,10 @@
 package main
 
 import (
+	"log"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
@@ -20,5 +22,5 @@ func main() {
 	LinkOpenAPI(r)
 	LinkAuthJWT(r) // Making the auth context, all above this will be restricted
 	LinkUsersHelper(r)
-	r.Run(":443")
+	log.Fatal(autotls.Run(r,"citapp.tk"))
 }
