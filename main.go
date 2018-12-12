@@ -29,10 +29,10 @@ import (
 //}
 
 type signupBody struct {
-	dni   string  "json:dni"
-	email string "json:email"
-	password   string  "json:password"
-	name   string  "json:name"
+	dni   string
+	email string
+	password   string
+	name   string  
 }
 
 func HomeServer(w http.ResponseWriter, req *http.Request) {
