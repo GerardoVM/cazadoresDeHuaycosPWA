@@ -8,8 +8,6 @@ import (
 	"net/http"
 	"github.com/gorilla/mux"
 	"encoding/json"
-    "fmt"
-    "os"
 )
 
 //func main() {
@@ -41,23 +39,17 @@ func HomeServer(w http.ResponseWriter, req *http.Request) {
 func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     enableCors(&w)
-    w.Header().Set("Content-Type", "application/json")
 
-    type ColorGroup struct {
-    		ID     int
-    		Name   string
-    		Colors []string
-    	}
-    	group := ColorGroup{
-    		ID:     1,
-    		Name:   "Reds",
-    		Colors: []string{"Crimson", "Red", "Ruby", "Maroon"},
-    	}
-    	b, err := json.MarshalIndent(group, "", "  ")
-    	if err != nil {
-    		fmt.Println("error:", err)
-    	}
-    	os.Stdout.Write(b)
+    profile := Profile{"Alex", []string{"snowboarding", "programming"}}
+
+      js, err := json.Marshal(profile)
+      if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+      }
+
+    w.Header().Set("Content-Type", "application/json")
+    w.Write(js)
 
 }
 
