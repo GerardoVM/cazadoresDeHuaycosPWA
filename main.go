@@ -40,7 +40,7 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     enableCors(&w)
     w.Header().Set("Content-Type", "application/json")
-    fmt.Fprintf(w, "This is an example server.\n")
+    fmt.Fprintf(w, '{"alive": true}')
 
 }
 
