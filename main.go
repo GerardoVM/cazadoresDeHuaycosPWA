@@ -29,7 +29,7 @@ import (
 	//log.Fatal(autotls.Run(r,"citapp.tk"))
 //}
 
-type signupBody struct {
+type SignupBody struct {
 	Dni   string
 	Email string
 	Password   string
@@ -48,9 +48,9 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     enableCors(&w)
 
-    bod := signupBody{}
+    bod := SignupBody{}
 
-    err := json.NewDecoder(req.Body).Decode(&signupBody)
+    err := json.NewDecoder(req.Body).Decode(&SignupBody)
 
     if err != nil{
         panic(err)
