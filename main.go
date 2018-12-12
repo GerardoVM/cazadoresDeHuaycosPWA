@@ -27,20 +27,20 @@ import (
 	//log.Fatal(autotls.Run(r,"citapp.tk"))
 //}
 
-func HelloServer(w http.ResponseWriter, req *http.Request) {
+func HomeServer(w http.ResponseWriter, req *http.Request) {
     enableCors(&w)
     w.Header().Set("Content-Type", "text/plain")
-    w.Write([]byte("This is an example server.\n"))
+    w.Write([]byte("You are right.\n"))
     // fmt.Fprintf(w, "This is an example server.\n")
     // io.WriteString(w, "This is an example server.\n")
 }
 
-func TestServer(w http.ResponseWriter, req *http.Request) {
+func signUpServer(w http.ResponseWriter, req *http.Request) {
+
     enableCors(&w)
-    w.Header().Set("Content-Type", "text/plain")
-    w.Write([]byte("Save my life please.\n"))
-    // fmt.Fprintf(w, "This is an example server.\n")
-    // io.WriteString(w, "This is an example server.\n")
+    w.Header().Set("Content-Type", "application/json")
+    io.WriteString(w, '{"alive": true}')
+
 }
 
 func enableCors(w *http.ResponseWriter) {
@@ -50,8 +50,8 @@ func enableCors(w *http.ResponseWriter) {
 func main() {
 
     r := mux.NewRouter()
-    r.HandleFunc("/", HelloServer)
-    r.HandleFunc("/products", TestServer)
+    r.HandleFunc("/", HomeServer)
+    r.HandleFunc("/signup", signUpServer)
 
     http.Handle("/", r)
     err := http.ListenAndServeTLS("citapp.tk:443", "cert.pem", "key.pem", nil)
