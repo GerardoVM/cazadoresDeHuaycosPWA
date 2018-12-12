@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"github.com/gorilla/mux"
 	"encoding/json"
+	"io/ioutil"
 )
 
 //func main() {
@@ -28,10 +29,10 @@ import (
 //}
 
 type signupBody struct {
-    dni string
-    email string
-    password string
-    name string
+	dni   string  `json:"dni"`
+	email string `json:"email"`
+	password   string  `json:"password"`
+	name   string  `json:"name"`
 }
 
 func HomeServer(w http.ResponseWriter, req *http.Request) {
@@ -46,24 +47,28 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     enableCors(&w)
 
-    w.Header().Set("Content-Type", "application/json")
+    b, err := ioutil.ReadAll(req.Body)
+    	defer req.Body.Close()
+    	if err != nil {
+    		http.Error(w, err.Error(), 500)
+    		return
+    	}
 
-    data := json.NewDecoder(req.Body)
+    	// Unmarshal
+    	var msg signupBody
+    	err = json.Unmarshal(b, &msg)
+    	if err != nil {
+    		http.Error(w, err.Error(), 500)
+    		return
+    	}
 
-    var requestBody signupBody
-
-    log.Println(req.Body)
-
-    err := data.Decode(&requestBody)
-      if err != nil {
-        log.Println("panic")
-        log.Println(err)
-          panic(err)
-      }
-
-    js, err := json.Marshal(req.Body)
-
-    w.Write(js)
+    	output, err := json.Marshal(msg)
+    	if err != nil {
+    		http.Error(w, err.Error(), 500)
+    		return
+    	}
+    	w.Header().Set("content-type", "application/json")
+    	w.Write(output)
 
     //profile := Profile{"Alex", []string{"snowboarding", "programming"}}
 
