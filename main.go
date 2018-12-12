@@ -47,6 +47,8 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     enableCors(&w)
 
+    w.Header().Set("content-type", "application/json")
+
     b, err := ioutil.ReadAll(req.Body)
     	defer req.Body.Close()
     	if err != nil {
@@ -67,7 +69,7 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
     		http.Error(w, err.Error(), 500)
     		return
     	}
-    	w.Header().Set("content-type", "application/json")
+
     	w.Write(output)
 
     //profile := Profile{"Alex", []string{"snowboarding", "programming"}}
