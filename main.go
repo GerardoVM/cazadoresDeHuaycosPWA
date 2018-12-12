@@ -6,7 +6,7 @@ import (
 	//"github.com/asaskevich/govalidator"
 	"net/http"
 	"github.com/gorilla/mux"
-	//"encoding/json"
+	"encoding/json"
 	"io/ioutil"
 	"fmt"
 )
@@ -30,10 +30,10 @@ import (
 //}
 
 type signupBody struct {
-	dni   string
-	email string
-	password   string
-	name   string
+	Dni   string
+	Email string
+	Password   string
+	Name   string
 }
 
 func HomeServer(w http.ResponseWriter, req *http.Request) {
@@ -48,14 +48,23 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     enableCors(&w)
 
-    w.Header().Set("content-type", "application/json")
+    bod := signupBody{}
 
-    b, err := ioutil.ReadAll(req.Body)
-    if err != nil {
+    err := json.NewDecoder(req.Body).Decode(&signupBody)
+
+    if err != nil{
         panic(err)
     }
 
-    fmt.Printf("%s", b)
+    bodJson, err := json.Marshal(bod)
+
+    if err != nil{
+        panic(err)
+    }
+
+    w.Header().Set("content-type", "application/json")
+
+    w.Write(bodJson)
 
     //profile := Profile{"Alex", []string{"snowboarding", "programming"}}
 
