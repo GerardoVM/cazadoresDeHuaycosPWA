@@ -31,7 +31,7 @@ type signupBody struct {
     dni int
     email string
     password int
-    name string 
+    name string
 }
 
 func HomeServer(w http.ResponseWriter, req *http.Request) {
@@ -46,7 +46,7 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     enableCors(&w)
 
-    data := json.NewDecoder(req.body)
+    data := json.NewDecoder(req.Body)
 
     var requestBody signupBody
 
