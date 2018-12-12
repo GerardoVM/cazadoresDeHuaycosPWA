@@ -54,11 +54,12 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     err := data.Decode(&requestBody)
       if err != nil {
-        log.Println(req.Body)
+        log.Println("panic")
+        log.Println(err)
           panic(err)
       }
 
-    log.Println(requestBody.dni)
+    log.Println("no panic")
 
     //profile := Profile{"Alex", []string{"snowboarding", "programming"}}
 
