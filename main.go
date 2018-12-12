@@ -49,9 +49,10 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
     data := json.NewDecoder(req.Body)
 
     var requestBody signupBody
-
+   
     err := data.Decode(&requestBody)
       if err != nil {
+        log.Println(requestBody)
           panic(err)
       }
 
