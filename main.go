@@ -52,7 +52,7 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     err := data.Decode(&requestBody)
       if err != nil {
-        log.Println(requestBody)
+        log.Println(req.Body)
           panic(err)
       }
 
