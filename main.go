@@ -7,7 +7,7 @@ import (
 	//"github.com/gin-gonic/autotls"
 	"net/http"
 	"github.com/gorilla/mux"
-	"io/ioutil"
+	"fmt"
 )
 
 //func main() {
@@ -40,7 +40,7 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     enableCors(&w)
     w.Header().Set("Content-Type", "application/json")
-    io.WriteString(w, '{"alive": true}')
+    fmt.Fprintf(w, "This is an example server.\n")
 
 }
 
