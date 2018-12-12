@@ -6,6 +6,7 @@ import (
 	//"github.com/gin-contrib/cors"
 	//"github.com/gin-gonic/autotls"
 	"net/http"
+	"github.com/gorilla/mux"
 )
 
 //func main() {
@@ -34,12 +35,25 @@ func HelloServer(w http.ResponseWriter, req *http.Request) {
     // io.WriteString(w, "This is an example server.\n")
 }
 
+func TestServer(w http.ResponseWriter, req *http.Request) {
+    enableCors(&w)
+    w.Header().Set("Content-Type", "text/plain")
+    w.Write([]byte("Save my life please.\n"))
+    // fmt.Fprintf(w, "This is an example server.\n")
+    // io.WriteString(w, "This is an example server.\n")
+}
+
 func enableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 }
 
 func main() {
-    http.HandleFunc("/", HelloServer)
+
+    r := mux.NewRouter()
+    r.HandleFunc("/", HelloServer)
+    r.HandleFunc("/products", TestServer)
+
+    http.Handle("/", r)
     err := http.ListenAndServeTLS("citapp.tk:443", "cert.pem", "key.pem", nil)
     if err != nil {
         log.Fatal("ListenAndServe: ", err)
