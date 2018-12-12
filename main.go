@@ -2,8 +2,8 @@ package main
 
 import (
 	"log"
-	"github.com/pkg/errors"
-	"github.com/asaskevich/govalidator"
+	//"github.com/pkg/errors"
+	//"github.com/asaskevich/govalidator"
 	"net/http"
 	"github.com/gorilla/mux"
 	"encoding/json"
@@ -50,7 +50,7 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     var requestBody signupBody
 
-    err := decoder.Decode(&requestBody)
+    err := data.Decode(&requestBody)
       if err != nil {
           panic(err)
       }
