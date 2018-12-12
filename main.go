@@ -2,9 +2,8 @@ package main
 
 import (
 	"log"
-	//"github.com/gin-gonic/gin"
-	//"github.com/gin-contrib/cors"
-	//"github.com/gin-gonic/autotls"
+	"github.com/pkg/errors"
+	"github.com/asaskevich/govalidator"
 	"net/http"
 	"github.com/gorilla/mux"
 	"encoding/json"
@@ -28,9 +27,11 @@ import (
 	//log.Fatal(autotls.Run(r,"citapp.tk"))
 //}
 
-type Profile struct {
-  Name    string
-  Hobbies []string
+type signupBody struct {
+    dni Int,
+    email String,
+    password Int,
+    name String,
 }
 
 func HomeServer(w http.ResponseWriter, req *http.Request) {
@@ -45,16 +46,27 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     enableCors(&w)
 
-    profile := Profile{"Alex", []string{"snowboarding", "programming"}}
+    data := json.NewDecoder(req.Body)
 
-      js, err := json.Marshal(profile)
+    var requestBody signupBody
+
+    err := decoder.Decode(&requestBody)
       if err != nil {
-        http.Error(w, err.Error(), http.StatusInternalServerError)
-        return
+          panic(err)
       }
+      
+    log.Println(requestBody.dni)
 
-    w.Header().Set("Content-Type", "application/json")
-    w.Write(js)
+    //profile := Profile{"Alex", []string{"snowboarding", "programming"}}
+
+      //js, err := json.Marshal(profile)
+      //if err != nil {
+        //http.Error(w, err.Error(), http.StatusInternalServerError)
+        //return
+      //}
+
+    //w.Header().Set("Content-Type", "application/json")
+    //w.Write(js)
 
 }
 
