@@ -28,9 +28,9 @@ import (
 //}
 
 type signupBody struct {
-    dni int
+    dni string
     email string
-    password int
+    password string
     name string
 }
 
