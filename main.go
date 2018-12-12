@@ -28,10 +28,10 @@ import (
 //}
 
 type signupBody struct {
-    dni int
-    email string
-    password int
-    name string
+    dni int 'json:"dni"'
+    email string    'json:"email"'
+    password int    'json:"password"'
+    name string 'json:"name"'
 }
 
 func HomeServer(w http.ResponseWriter, req *http.Request) {
@@ -46,7 +46,7 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     enableCors(&w)
 
-    data := json.NewDecoder(req.Body)
+    data := json.NewDecoder(req.body)
 
     var requestBody signupBody
 
