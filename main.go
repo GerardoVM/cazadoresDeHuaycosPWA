@@ -50,7 +50,7 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     w.Header().Set("content-type", "application/json")
     decoder := json.NewDecoder(req.Body)
-    var pls SignupBody
+    pls := SignupBody{}
     err := decoder.Decode(&pls)
     if err != nil{
         panic(err)
