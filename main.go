@@ -40,7 +40,6 @@ type SignupBody struct {
  	Username   string
  	Password   string `json:"-"`
  	IsAdmin bool
- 	CreatedAt time.Time
  }
 
 func HomeServer(w http.ResponseWriter, req *http.Request) {
@@ -62,8 +61,6 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
     if err != nil{
         panic(err)
     }
-
-    user.CreatedAt = time.Now().Local()
 
     userJson, err := json.Marshal(user)
 
