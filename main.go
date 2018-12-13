@@ -36,9 +36,11 @@ type SignupBody struct {
  	Name   string
  }
 
- type Profile struct {
- 	Name   string
- 	Hopbbies []string
+ type User struct {
+ 	Username   string
+ 	Password   string `json:"-"`
+ 	IsAdmin bool
+ 	CreatedAt time.Time
  }
 
 func HomeServer(w http.ResponseWriter, req *http.Request) {
@@ -53,18 +55,26 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     enableCors(&w)
 
-    w.Header().Set("content-type", "application/json")
+    user := User{}
 
-    profile := Profile{"Alex", []string{"snowboarding", "programming"}}
+    err := json.NewDecoder(r.Body).Decode(&user)
 
-    js, err := json.Marshal(profile)
-        if err != nil {
-            http.Error(w, err.Error(), http.StatusInternalServerError)
-            return
-        }
+    if err != nil{
+        panic(err)
+    }
+
+    user.CreatedAt = time.Now().Local()
+
+    userJson, err := json.Marshal(user)
+
+    if err != nil{
+        panic(err)
+    }
 
     w.Header().Set("Content-Type", "application/json")
-    w.Write(js)
+    w.WriteHeader(http.StatusOK)
+
+    w.Write(userJson)
 
 
     //Works in postman
