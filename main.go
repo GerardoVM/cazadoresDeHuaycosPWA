@@ -48,6 +48,8 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     enableCors(&w)
 
+    w.Header().Set("content-type", "application/json")
+
     bod := SignupBody{}
 
     err := json.NewDecoder(req.Body).Decode(&bod)
@@ -61,8 +63,6 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
     if err != nil{
         panic(err)
     }
-
-    w.Header().Set("content-type", "application/json")
 
     w.Write(bodJson)
 
