@@ -48,23 +48,33 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     enableCors(&w)
 
-    w.Header().Set("content-type", "application/json")
-
-    bod := SignupBody{}
-
-    err := json.NewDecoder(req.Body).Decode(&bod)
-
+    decoder := json.NewDecoder(req.Body)
+    var pls SignupBody
+    err := decoder.Decode(&pls)
     if err != nil{
         panic(err)
     }
+    log.Println(pls.Dni)
 
-    bodJson, err := json.Marshal(bod)
 
-    if err != nil{
-        panic(err)
-    }
+    //Works in postman
+    //w.Header().Set("content-type", "application/json")
 
-    w.Write(bodJson)
+    //bod := SignupBody{}
+
+    //err := json.NewDecoder(req.Body).Decode(&bod)
+
+    //if err != nil{
+        //panic(err)
+    //}
+
+    //bodJson, err := json.Marshal(bod)
+
+    //if err != nil{
+        //panic(err)
+    //}
+
+    //w.Write(bodJson)
 
     //profile := Profile{"Alex", []string{"snowboarding", "programming"}}
 
