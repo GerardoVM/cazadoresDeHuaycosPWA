@@ -30,11 +30,16 @@ import (
 //}
 
 type SignupBody struct {
-	Dni   string
-	Email string
-	Password   string
-	Name   string
-}
+ 	Dni   string
+ 	Email string
+ 	Password   string
+ 	Name   string
+ }
+
+ type Profile struct {
+ 	Name   string
+ 	Hopbbies []string
+ }
 
 func HomeServer(w http.ResponseWriter, req *http.Request) {
     enableCors(&w)
