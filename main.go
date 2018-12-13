@@ -36,7 +36,7 @@ type SignupBody struct {
  	Name   string
  }
 
- type User struct {
+ type UserX struct {
  	Username   string
  	Password   string `json:"-"`
  	IsAdmin bool
@@ -54,7 +54,7 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     enableCors(&w)
 
-    user := User{}
+    user := UserX{}
 
     err := json.NewDecoder(req.Body).Decode(&user)
 
