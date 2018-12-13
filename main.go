@@ -56,7 +56,7 @@ func signUpServer(w http.ResponseWriter, req *http.Request) {
 
     user := User{}
 
-    err := json.NewDecoder(r.Body).Decode(&user)
+    err := json.NewDecoder(req.Body).Decode(&user)
 
     if err != nil{
         panic(err)
